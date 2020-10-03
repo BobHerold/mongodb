@@ -18,11 +18,14 @@ def mongo_connect(url):
         print("Could not connect to MongoDB: %s") % e
 
 
-conn = mongo_connect(MONGODB_URI) 
+conn = mongo_connect(MONGO_URI)
 
 coll = conn[DBS_NAME][COLLECTION_NAME]
 
-documents = coll.find()
+coll.update_many({"nationality": "american"}, {"$set": {"hair-color": "maroon"}})
+
+documents = coll.find({"nationality": "american"})
+
 
 for doc in documents:
     print(doc)
